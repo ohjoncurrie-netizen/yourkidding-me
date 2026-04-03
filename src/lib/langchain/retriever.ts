@@ -1,9 +1,8 @@
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 async function embed(text: string): Promise<number[]> {
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   const res = await openai.embeddings.create({
     model: "text-embedding-3-small",
     input: text,
