@@ -26,7 +26,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...    ← Settings > API > service_role
 GITHUB_TOKEN=ghp_...                ← github.com/settings/tokens (read:user scope)
-NEXT_PUBLIC_GITHUB_USERNAME=ohjoncurrie
+NEXT_PUBLIC_GITHUB_USERNAME=ohjoncurrie-netizen
 INGEST_SECRET=pick-any-long-random-string
 ```
 
