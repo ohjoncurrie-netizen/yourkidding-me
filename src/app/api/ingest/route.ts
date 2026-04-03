@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ingestDocs } from "@/lib/langchain/ingest";
 
+export const dynamic = "force-dynamic";
+
 // Protect with a secret so random people can't re-embed and waste your OpenAI credits
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-ingest-secret");

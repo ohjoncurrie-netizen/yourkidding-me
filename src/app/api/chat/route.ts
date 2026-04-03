@@ -2,7 +2,12 @@ import { NextRequest } from "next/server";
 import OpenAI from "openai";
 import { retrieveContext } from "@/lib/langchain/retriever";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+// Lazy init — prevents build-time failure when env vars aren't set
+function getOpenAI() {
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
+
+export const dynamic = "force-dynamic";
 
 const PERSONA = `You are an AI clone of Jon Currie, a full-stack developer who built:
 - HotelDeposit.com: booking/deposit platform (Next.js, PostgreSQL, Stripe)
@@ -43,7 +48,7 @@ export async function POST(req: NextRequest) {
   const systemPrompt = buildSystemPrompt(context);
 
   // Stream the response
-  const stream = await openai.chat.completions.create({
+  const stream = await getOpenAI().chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
       { role: "system", content: systemPrompt },
