@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* ─── Vibe Modes ──────────────────────────────────────────── */
+:root {
+  --bg: #0a0a0a;
+  --fg: #ededed;
+  --accent: #ededed;
+  --accent2: #888;
+  --glow: rgba(255,255,255,0.08);
+  --font-mono: "Geist Mono", "Fira Code", monospace;
+}
+
+[data-vibe="corporate"] {
+  --bg: #f5f5f5;
+  --fg: #0a0a0a;
+  --accent: #0a0a0a;
+  --accent2: #555;
+  --glow: rgba(0,0,0,0.06);
+}
+
+[data-vibe="data"] {
+  --bg: #000d1a;
+  --fg: #00ff88;
+  --accent: #00bfff;
+  --accent2: #ff6b00;
+  --glow: rgba(0,255,136,0.12);
+}
+
+[data-vibe="chaos"] {
+  --bg: #0d0020;
+  --fg: #ff2d78;
+  --accent: #ffe600;
+  --accent2: #00f5d4;
+  --glow: rgba(255,45,120,0.18);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  transition: background 0.6s ease, color 0.6s ease;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 2px; }
+
+/* ─── Selection ───────────────────────────────────────────── */
+::selection { background: var(--accent); color: var(--bg); }
+
+/* ─── Terminal cursor blink ───────────────────────────────── */
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+.cursor-blink { animation: blink 1s step-end infinite; }
+
+/* ─── Scanline overlay for data/chaos modes ───────────────── */
+[data-vibe="data"] body::after,
+[data-vibe="chaos"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.04) 2px,
+    rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
