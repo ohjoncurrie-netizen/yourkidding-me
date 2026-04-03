@@ -9,7 +9,6 @@ import { createClient } from "@supabase/supabase-js";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const DOCS = [
   { name: "resume",     file: "resume.md" },
@@ -32,6 +31,7 @@ function chunkText(text: string, size = 800, overlap = 120): string[] {
 }
 
 async function embedBatch(texts: string[]): Promise<number[][]> {
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   const res = await openai.embeddings.create({
     model: "text-embedding-3-small",
     input: texts,
